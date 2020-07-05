@@ -1,19 +1,13 @@
 mod retriever;
 
-use isahc::prelude::*;
-use soup::prelude::*;
+use retriever::Builder;
 
 fn main() -> Result<(), isahc::Error> {
-    let mut webpage = isahc::get("https://smite.guru/builds/anubis")?;
-    let soup = Soup::from_reader(webpage.text()?.as_bytes())?;
+    let builder = Builder::new("https://smite.guru/builds/achilles").unwrap();
+    let items = builder.scrape_beg_and_end();
 
-    println!("Scraping started");
-
-    let starter_items = retriever::scrape_starter(&soup);
-    let ending_items = retriever::scrape_ending(&soup);
-
-    println!("{:?}", starter_items);
-    println!("{:?}", ending_items);
+    println!("{:?}", items[0]);
+    println!("{:?}", items[1]);
 
     Ok(())
 }
