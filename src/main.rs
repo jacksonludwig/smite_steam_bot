@@ -1,13 +1,16 @@
 mod retriever;
 
 use isahc::prelude::*;
-use scraper::Html;
+use soup::prelude::*;
 
 fn main() -> Result<(), isahc::Error> {
-    let mut webpage = isahc::get("https://smite.guru/builds/ares")?;
-    let soup = Html::parse_document(&webpage.text()?);
+    let mut webpage = isahc::get("https://smite.guru/builds/anubis")?;
+    let soup = Soup::from_reader(webpage.text()?.as_bytes());
 
-    retriever::scrape_starter(&soup);
+    println!("Scraping started");
+
+    let starter_items = retriever::scrape_starter(&soup.unwrap());
+    println!("{:?}", starter_items);
 
     Ok(())
 }
