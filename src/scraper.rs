@@ -1,5 +1,6 @@
 use super::gods;
 use soup::prelude::*;
+use std::io::Result;
 
 const STARTER_ITEM_AMT_DEFAULT: isize = 7;
 const ENDING_ITEM_AMT_DEFAULT: isize = 5;
@@ -52,8 +53,9 @@ impl Builder {
     }
 }
 
-pub fn get_god_build(god: &str) -> Vec<Vec<String>> {
+pub fn get_god_build(god: &str) -> Result<Vec<Vec<String>>> {
     let html = gods::read_html_from_file(god);
-    let builder = Builder::new(&html);
-    builder.scrape_beg_and_end()
+    let builder = Builder::new(&html?);
+
+    Ok(builder.scrape_beg_and_end())
 }

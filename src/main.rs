@@ -2,7 +2,7 @@ mod gods;
 mod scraper;
 
 fn main() -> Result<(), isahc::Error> {
-    let items = scraper::get_god_build("khepri");
+    let items = scraper::get_god_build("khepri").unwrap();
     println!("{:?}", items[0]);
     println!("{:?}", items[1]);
 
