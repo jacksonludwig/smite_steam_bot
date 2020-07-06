@@ -45,7 +45,7 @@ fn download_html(god: &str) -> Result<String> {
 }
 
 // Formats name
-pub fn download_all_html(names: Vec<&str>) -> Result<()> {
+pub fn download_all_html(names: Vec<String>) -> Result<()> {
     for name in names {
         let name = format_name(&name);
         let page = download_html(&name)?;
@@ -81,7 +81,7 @@ pub fn read_html_from_file(god: &str) -> Result<String> {
     Ok(data)
 }
 
-pub fn delete_all_html(names: Vec<&str>) -> Result<()> {
+pub fn delete_all_html(names: Vec<String>) -> Result<()> {
     for name in names {
         let name = format_name(&name);
 
@@ -90,7 +90,7 @@ pub fn delete_all_html(names: Vec<&str>) -> Result<()> {
 
         let path = Path::new(&str_path);
 
-        fs::remove_file(path);
+        fs::remove_file(path)?;
     }
     Ok(())
 }

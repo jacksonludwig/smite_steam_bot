@@ -9,3 +9,4 @@ edition = "2018"
 [dependencies]
 soup="*"
 isahc="*"
+serenity = "0.8"
