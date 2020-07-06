@@ -54,6 +54,5 @@ impl Builder {
 pub fn get_god_build(god: &str) -> Vec<Vec<String>> {
     let html = gods::read_html_from_file(god);
     let builder = Builder::new(&html);
-    let items = builder.scrape_beg_and_end();
-    items
+    builder.scrape_beg_and_end()
 }
